@@ -24,10 +24,10 @@
         - name: Set outputs (version+changelog)
           id: vars
           run: |
-            echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_OUTPUT
-            echo "changelog=$(cat ./CHANGELOG.md)" >> $GITHUB_OUTPUT
-            echo ${{ steps.vars.outputs.version }}
-            echo ${{ steps.vars.outputs.changelog }}
+            echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
+            echo "changelog=$(cat ./CHANGELOG.md)" >> $GITHUB_ENV
+            echo $version
+            echo $changelog
 
         - name: Add changelog to readme
           run: |
@@ -36,13 +36,13 @@
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
             git add README.md
-            git commit -m "Update changelog in README for ${{ steps.vars.outputs.version }}"
+            git commit -m "Update changelog in README for $version"
             git push        
         
         - name: Package CCStopper folder
           run: |
-            mv 'src' 'CCStopper ${{ steps.vars.outputs.version }}'
-            zip -r CCStopper.zip 'CCStopper ${{ steps.vars.outputs.version }}'
+            mv 'src' 'CCStopper $version'
+            zip -r CCStopper.zip 'CCStopper $version'
   
         - name: Create Release
           uses: softprops/action-gh-release@v0.1.15
@@ -53,9 +53,9 @@
               > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
   
               ## Changelog
-              ${{ steps.vars.outputs.changelog }}
-            tag_name: auto-${{ steps.vars.outputs.version }}
-            name: ${{ steps.vars.outputs.version }}
+              $changelog
+            tag_name: auto-$version
+            name: $version
             files: ./CCStopper.zip
   
   permissions:
