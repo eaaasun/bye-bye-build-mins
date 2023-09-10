@@ -3,6 +3,7 @@
   
 `Changed`
 - README.md
+- DEEZ
 
 `Removed`
 - YOURMOM.md
