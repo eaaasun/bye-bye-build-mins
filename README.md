@@ -9,6 +9,7 @@
 - [Install/Run](#installrun)
 - [Features](#features)
 - [Changelog](#changelog)
+  - [Security](#security)
 - [Contributing](#contributing)
   - [Issues](#issues)
   - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
@@ -54,10 +55,14 @@
 
 ## Changelog
 <!-- START CHANGELOG -->
-### Added
-### Changed
-### Deprecated
-### Fixed
+`Added`
+- Changelog
+  
+`Changed`
+- README.md
+
+`Removed`
+- YOURMOM.md
 ### Security
 <!-- END CHANGELOG -->
 

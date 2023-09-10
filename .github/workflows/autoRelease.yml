@@ -21,11 +21,13 @@
         - name: Install zip
           run: sudo apt-get install zip
   
-        - name: Read version from Functions.ps1
+        - name: Set outputs (version+changelog)
           id: vars
           run: |
             echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_OUTPUT
+            echo "changelog=$(cat ./CHANGELOG.md)" >> $GITHUB_OUTPUT
             echo ${{ steps.vars.outputs.version }}
+            echo ${{ steps.vars.outputs.changelog }}
 
         - name: Add changelog to readme
           run: |
@@ -51,11 +53,10 @@
               > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
   
               ## Changelog
-            body_path: CHANGELOG.md
+              ${{ steps.vars.outputs.changelog }}
             tag_name: auto-${{ steps.vars.outputs.version }}
             name: ${{ steps.vars.outputs.version }}
             files: ./CCStopper.zip
-            append_body: true
   
   permissions:
     contents: write

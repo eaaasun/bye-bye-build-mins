@@ -1,6 +1,8 @@
-##### Added
+`Added`
 - Changelog
-##### Changed
+  
+`Changed`
 - README.md
-##### Removed
+
+`Removed`
 - YOURMOM.md
