@@ -21,10 +21,11 @@
         - name: Set outputs (version+changelog)
           id: vars
           run: |
-            echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_OUTPUT
-            echo "changes=$(cat ./CHANGELOG.md)" >> $GITHUB_OUTPUT
-            echo ${{ steps.vars.outputs.version }}
-            echo ${{ steps.vars.outputs.changes }}
+            echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
+            changelog_content=$(cat CHANGELOG.md)
+            echo "changelog=$changelog_content" >> $GITHUB_ENV
+            echo ${{ env.version }}
+            echo ${{ env.changelog }}
 
         - name: Add changelog to readme
           run: |
@@ -33,7 +34,7 @@
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
             git add README.md
-            git commit -m "Update changelog in README for ${{ steps.vars.outputs.version }}"
+            git commit -m "Update changelog in README for $version"
             git push        
 
         - name: Install zip
@@ -41,8 +42,8 @@
   
         - name: Package CCStopper folder
           run: |
-            mv 'src' 'CCStopper ${{ steps.vars.outputs.version }}'
-            zip -r CCStopper.zip 'CCStopper ${{ steps.vars.outputs.version }}'
+            mv 'src' 'CCStopper $version'
+            zip -r CCStopper.zip 'CCStopper $version'
   
         - name: Create Release
           uses: softprops/action-gh-release@v0.1.15
@@ -53,9 +54,9 @@
               > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
   
               ## Changelog
-              ${{ steps.vars.outputs.changes }}
-            tag_name: auto-${{ steps.vars.outputs.version }}
-            name: ${{ steps.vars.outputs.version }}
+              ${{ env.changelog }}
+            tag_name: auto-$version
+            name: $version
             files: ./CCStopper.zip
   
   permissions:
