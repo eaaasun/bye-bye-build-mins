@@ -65,7 +65,7 @@
 
 `Removed`
 - YOURMOM.md
-<!-- END CHANGELOG -->
+- MYFATHER.md<!-- END CHANGELOG -->
 
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
