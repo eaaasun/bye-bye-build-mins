@@ -50,10 +50,11 @@
               > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
   
               ## Changelog
+            body_path: CHANGELOG.md
             tag_name: auto-${{ steps.vars.outputs.version }}
             name: ${{ steps.vars.outputs.version }}
             files: ./CCStopper.zip
-            append_body: ./CHANGELOG.md
+            append_body: true
   
   permissions:
     contents: write
