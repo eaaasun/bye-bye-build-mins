@@ -53,7 +53,6 @@
   - Hide Creative Cloud Folder in Explorer
 
 ## Changelog
-<!-- changelog content -->
 
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
