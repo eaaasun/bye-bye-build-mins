@@ -8,7 +8,7 @@
 
 - [Install/Run](#installrun)
 - [Features](#features)
-- [v1.2.3 Changelog](#v123-changelog)
+- [Changelog](#changelog)
 - [Contributing](#contributing)
   - [Issues](#issues)
   - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
@@ -52,25 +52,10 @@
   - Lock Genuine Checker Folder
   - Hide Creative Cloud Folder in Explorer
 
-## v1.2.3 Changelog
-- One-line install/run
-  - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
-  - see [below](#one-line-installrun) for commands
-- re-written hosts block module
-  - it will now update hosts file if entries already exists (fixed #80)
-  - new comments surrounding entries in hosts file
-  - it _should_ migrate old entries, but it hasn't been extensively tested
-- Removed firewall block module
-  - The hosts patch + CC App patch works better 
-- New module for patching the creative cloud app's buttons
-  - credit to AbsentForeskin on the genP discord
-  - system restart recommended after patching
-- Created logo for shortcut icons (its very original)
-- Documentation update
+## Changelog
+<!-- changelog content -->
 
-### Hotfix.1 Changelog <!-- omit in toc -->
-- Changed the hosts block module to use the non-temp hosts file
-<!-- ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) omit in toc -->
+###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
 ## Contributing
