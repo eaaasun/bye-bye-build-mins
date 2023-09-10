@@ -22,7 +22,7 @@
           id: vars
           run: |
             echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
-            changelog_content=$(cat CHANGELOG.md)
+            changelog_content=$(cat <CHANGELOG.md)
             echo "changelog=$changelog_content" >> $GITHUB_ENV
             echo ${{ env.version }}
             echo ${{ env.changelog }}
