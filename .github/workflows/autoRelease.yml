@@ -29,7 +29,7 @@
 
         - name: Add changelog to readme
           run: |
-            sed -e '/<!-- changelog content -->/ {' -e 'r CHANGELOG.md' -e 'd' -e '}' README.md 
+            sed -e '/<!-- changelog content -->/ {' -e 'r CHANGELOG.md' -e 'd' -e '}' -i README.md 
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
             git add README.md
