@@ -9,7 +9,9 @@
 - [Install/Run](#installrun)
 - [Features](#features)
 - [Changelog](#changelog)
-  - [Security](#security)
+      - [Added](#added)
+      - [Changed](#changed)
+      - [Removed](#removed)
 - [Contributing](#contributing)
   - [Issues](#issues)
   - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
@@ -55,15 +57,12 @@
 
 ## Changelog
 <!-- START CHANGELOG -->
-`Added`
+##### Added
 - Changelog
-  
-`Changed`
+##### Changed
 - README.md
-
-`Removed`
+##### Removed
 - YOURMOM.md
-### Security
 <!-- END CHANGELOG -->
 
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
