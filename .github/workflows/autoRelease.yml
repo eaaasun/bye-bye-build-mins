@@ -27,6 +27,22 @@
             echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_OUTPUT
             echo ${{ steps.vars.outputs.version }}
 
+        - name: List files
+          run: ls -R
+        - name: Convert Line Endings
+          run: dos2unix README.md CHANGELOG.md
+
+        - name: Display README Before
+          run: cat README.md
+        
+        - name: Replace Changelog
+          run: |
+            sed -i '/<!-- changelog content -->/r CHANGELOG.md' README.md
+          shell: bash
+        
+        - name: Display README After
+          run: cat README.md
+        
         - name: Add changelog to readme
           run: |
             sed -i '/<!-- changelog content -->/r CHANGELOG.md' README.md
