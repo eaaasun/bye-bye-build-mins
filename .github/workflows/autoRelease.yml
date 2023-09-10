@@ -30,9 +30,10 @@
         - name: Add changelog to readme
           run: |
             sed -i '/<!-- changelog content -->/r CHANGELOG.md' README.md
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "github-actions[bot]"
             git commit -am "Add changelog in README.md for ${{ steps.vars.outputs.version }}"
-            git push
-  
+            git push  
         - name: Package CCStopper folder
           run: |
             mv 'src' 'CCStopper ${{ steps.vars.outputs.version }}'
