@@ -22,8 +22,7 @@
           id: vars
           run: |
             echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_OUTPUT
-            changelog=$(cat ./CHANGELOG.md)
-            echo 'changes=$changelog' >> $GITHUB_OUTPUT
+            echo "changes=$(cat ./CHANGELOG.md)" >> $GITHUB_OUTPUT
             echo ${{ steps.vars.outputs.version }}
             echo ${{ steps.vars.outputs.changes }}
 
