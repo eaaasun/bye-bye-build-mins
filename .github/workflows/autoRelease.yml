@@ -36,7 +36,7 @@
             git commit -m "Update changelog in README for ${{ steps.vars.outputs.version }}"
             git push        
         
-            - name: Package CCStopper folder
+        - name: Package CCStopper folder
           run: |
             mv 'src' 'CCStopper ${{ steps.vars.outputs.version }}'
             zip -r CCStopper.zip 'CCStopper ${{ steps.vars.outputs.version }}'
