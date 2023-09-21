@@ -22,8 +22,8 @@
           id: vars
           run: |
             echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
-            changelog_content=$(cat CHANGELOG.md | base64)
-            echo "changelog=${changelog_content}" >> $GITHUB_ENV
+            changelog=$(sed -e 's/^/    /' CHANGELOG.md)
+            echo "changelog=$(sed -e 's/^/    /' CHANGELOG.md)" >> $GITHUB_ENV
             echo ${{ env.version }}
             echo ${{ env.changelog }}
 
@@ -31,6 +31,7 @@
           run: |
             sed -i '/<!-- START CHANGELOG -->/,/<!-- END CHANGELOG -->/{//!d}' README.md
             sed -i "/<!-- START CHANGELOG -->/r CHANGELOG.md" README.md
+            
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
             git add README.md
