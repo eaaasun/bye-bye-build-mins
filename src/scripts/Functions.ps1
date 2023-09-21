@@ -1,4 +1,4 @@
-$Version = "v21"
+$Version = "v22"
 
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
