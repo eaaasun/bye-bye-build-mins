@@ -1,65 +1,68 @@
 # This action automatically creates a release when pushing to main (in the src folder).
 # It also zips the contents of the src folder and uploads it as an artifact, which is included in the release.
 
-  name: Automatically Release
+name: Automatically Release
 
-  on:
-    push:
-      branches:
-        - main
-      paths:
-        - "src/**"
-  
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-  
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3.5.3
-  
-        - name: Set outputs (version+changelog)
-          id: vars
-          run: |
-            echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
-            changelog=$(sed -e 's/^/    /' CHANGELOG.md)
-            echo "changelog=$(sed -e 's/^/    /' CHANGELOG.md)" >> $GITHUB_ENV
-            echo ${{ env.version }}
-            echo ${{ env.changelog }}
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
 
-        - name: Add changelog to readme
-          run: |
-            sed -i '/<!-- START CHANGELOG -->/,/<!-- END CHANGELOG -->/{//!d}' README.md
-            sed -i "/<!-- START CHANGELOG -->/r CHANGELOG.md" README.md
-            
-            git config --local user.email "actions@github.com"
-            git config --local user.name "GitHub Actions"
-            git add README.md
-            git commit -m "Update changelog in README for $version"
-            git push        
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        - name: Install zip
-          run: sudo apt-get install zip
-  
-        - name: Package CCStopper folder
-          run: |
-            mv 'src' 'CCStopper $version'
-            zip -r CCStopper.zip 'CCStopper $version'
-  
-        - name: Create Release
-          uses: softprops/action-gh-release@v0.1.15
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            body: |
-              > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
-  
-              ## Changelog
-              ${{ env.changelog }}
-            tag_name: auto-$version
-            name: $version
-            files: ./CCStopper.zip
-  
-  permissions:
-    contents: write
-  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.3
+
+      - name: Set changelog
+        id: chglg
+        run: |
+          {
+            echo "changelog=$(sed -e 's/^/    /' CHANGELOG.md)"
+          } >> $GITHUB_ENV
+
+      - name: Set version
+        id: ver
+        run: |
+          echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
+          echo ${{ env.version }}
+
+      - name: Add changelog to readme
+        run: |
+          sed -i '/<!-- START CHANGELOG -->/,/<!-- END CHANGELOG -->/{//!d}' README.md
+          sed -i "/<!-- START CHANGELOG -->/r CHANGELOG.md" README.md
+
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add README.md
+          git commit -m "Update changelog in README for $version"
+          git push
+
+      - name: Install zip
+        run: sudo apt-get install zip
+
+      - name: Package CCStopper folder
+        run: |
+          mv 'src' 'CCStopper $version'
+          zip -r CCStopper.zip 'CCStopper $version'
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v0.1.15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: |
+            > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
+
+            ## Changelog
+            ${{ env.changelog }}
+          tag_name: auto-$version
+          name: $version
+          files: ./CCStopper.zip
+
+permissions:
+  contents: write
