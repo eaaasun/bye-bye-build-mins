@@ -22,7 +22,8 @@ jobs:
         id: chglg
         run: |
           {
-            echo "changelog=$(sed -e 's/^/    /' CHANGELOG.md)"
+            changelog=$(cat CHANGELOG.md)
+            echo ${changelog//\`/\\\`}
           } >> $GITHUB_ENV
 
       - name: Set version
