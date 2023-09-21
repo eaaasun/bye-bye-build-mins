@@ -21,17 +21,17 @@ jobs:
       - name: Set changelog
         id: chglg
         run: |
-          changelog=$(cat CHANGELOG.md)
-          echo ${changelog//\`/\\\`} >> $GITHUB_ENV
-
-      - name: Set version
-        id: ver
-        run: |
           {
             echo 'CHANGELOG_CONTENT<<EOF'
             cat CHANGELOG.md
             echo EOF
           } >> "$GITHUB_ENV"
+
+      - name: Set version
+        id: ver
+        run: |
+          echo "version=$(grep -oP '(?<=\$Version = \")[^\"]*' ./src/scripts/Functions.ps1)" >> $GITHUB_ENV
+          echo ${{ env.version }}
 
       - name: Add changelog to readme
         run: |
